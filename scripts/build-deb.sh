@@ -41,7 +41,7 @@ meson setup .build --prefix=/usr --buildtype=release -Duse_qt_version=qt5
 
 # --  Compile Source.
 
-ninja -C .build -k 0 -j $(nproc)
+ninja -C .build -k 0 -j "$(nproc)"
 
 
 # --  Build Debian Package with checkinstall.
