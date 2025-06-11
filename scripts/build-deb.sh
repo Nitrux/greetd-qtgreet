@@ -28,49 +28,68 @@
 set -e
 
 
-# --  Download Source.
+# -- Download Source.
 
-git clone --depth 1 --branch "$QTGREET_BRANCH" https://gitlab.com/marcusbritanicus/QtGreet.git
-cd QtGreet
+SRC_DIR="$(mktemp -d)"
+
+git clone --depth 1 --branch "$QTGREET_BRANCH" https://gitlab.com/marcusbritanicus/QtGreet.git "$SRC_DIR/qtgreet-src"
+
+cd "$SRC_DIR/qtgreet-src"
 
 
-# --  Configure Build.
+# -- Configure Build.
 
 meson setup .build --prefix=/usr --buildtype=release
 
 
-# --  Compile Source.
+# -- Compile Source.
 
 ninja -C .build -k 0 -j "$(nproc)"
 
 
-# --  Build Debian Package with checkinstall.
+# -- Create a temporary DESTDIR.
 
-cd .build
+DESTDIR="$(pwd)/pkg"
 
->> description-pak printf "%s\n" \
-	'Qt based greeter for greetd.' \
-	'' \
-	'Qt based greeter for greetd, to be run under wayfire or similar wlr-based compositors.' \
-	''
+rm -rf "$DESTDIR"
 
-checkinstall -D -y \
-	--install=no \
-	--fstrans=yes \
-	--pkgname=qtgreet \
-	--pkgversion="$PACKAGE_VERSION" \
-	--pkgarch=amd64 \
-	--pkgrelease="1" \
-	--pkglicense=LGPL-3 \
-	--pkggroup=utils \
-	--pkgsource=qtgreet \
-	--pakdir=. \
-	--maintainer=uri_herrera@nxos.org \
-	--provides=qtgreet \
-	--requires="greetd, libqt6core6" \
-	--nodoc \
-	--strip=no \
-	--stripso=yes \
-	--reset-uids=yes \
-	--deldesc=yes \
-	ninja install
+
+# -- Install to DESTDIR.
+
+DESTDIR="$DESTDIR" ninja -C .build install
+
+
+# -- Create DEBIAN control file.
+
+mkdir -p "$DESTDIR/DEBIAN"
+
+PKGNAME="qtgreet"
+MAINTAINER="uri_herrera@nxos.org"
+ARCHITECTURE="$(dpkg --print-architecture)"
+DESCRIPTION="Qt based greeter for greetd, to be run under wayfire or similar wlr-based compositors."
+
+cat > "$DESTDIR/DEBIAN/control" <<EOF
+Package: $PKGNAME
+Version: $PACKAGE_VERSION
+Section: utils
+Priority: optional
+Architecture: $ARCHITECTURE
+Maintainer: $MAINTAINER
+Description: $DESCRIPTION
+EOF
+
+
+# -- Build the Debian package.
+
+cd "$(dirname "$DESTDIR")"
+
+dpkg-deb --build "$(basename "$DESTDIR")" "${PKGNAME}_${PACKAGE_VERSION}_${ARCHITECTURE}.deb"
+
+
+# -- Move .deb to ./build/ for CI consistency.
+
+mkdir -p "$GITHUB_WORKSPACE/build"
+
+mv "${PKGNAME}_${PACKAGE_VERSION}_${ARCHITECTURE}.deb" "$GITHUB_WORKSPACE/build/"
+
+echo "Debian package created: $(pwd)/build/${PKGNAME}_${PACKAGE_VERSION}_${ARCHITECTURE}.deb"

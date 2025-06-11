@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Install basic packages
-        run: apt -q update && apt -yy install build-essential equivs git gnupg ruby-full sudo checkinstall
+        run: apt -q update && apt -yy install build-essential equivs git gnupg ruby-full sudo
 
       - name: Install package cloud
         run: gem install package_cloud
