@@ -11,4 +11,7 @@ $APT_COMMAND install -qy --no-install-recommends \
     meson \
     ninja-build \
     checkinstall \
-    qt6-base-dev
+    qt6-base-dev \
+    pkg-config \
+    cmake \
+    qt6-wayland-dev
