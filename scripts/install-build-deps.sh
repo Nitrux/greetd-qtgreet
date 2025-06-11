@@ -65,4 +65,8 @@ EOF
 
 $APT_COMMAND update -q
 $APT_COMMAND install -y --no-install-recommends \
-	wayqt-qt6
+    dfl-applications \
+    dfl-ipc \
+    dfl-login1 \
+    dfl-utils \
+    wayqt-qt6
