@@ -42,8 +42,8 @@ fi
 $APT_COMMAND update -q
 $APT_COMMAND install -y --no-install-recommends \
     cmake \
+    libmpv-dev \
     meson \
-    mpv \
     ninja-build \
     pkg-config \
     qt6-base-dev \
