@@ -57,7 +57,7 @@ cd .build
 checkinstall -D -y \
 	--install=no \
 	--fstrans=yes \
-	--pkgname=qtgreet-git \
+	--pkgname=qtgreet \
 	--pkgversion="$PACKAGE_VERSION" \
 	--pkgarch=amd64 \
 	--pkgrelease="1" \
@@ -67,7 +67,7 @@ checkinstall -D -y \
 	--pakdir=. \
 	--maintainer=uri_herrera@nxos.org \
 	--provides=qtgreet \
-	--requires="greetd" \
+	--requires="greetd, libqt6core6" \
 	--nodoc \
 	--strip=no \
 	--stripso=yes \
