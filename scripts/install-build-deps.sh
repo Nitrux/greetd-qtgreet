@@ -60,7 +60,7 @@ mkdir -p /etc/apt/keyrings
 curl -fsSL https://packagecloud.io/nitrux/testing/gpgkey | gpg --dearmor -o /etc/apt/keyrings/nitrux_testing-archive-keyring.gpg
 
 cat <<EOF > /etc/apt/sources.list.d/nitrux-testing.list
-deb [signed-by=/etc/apt/keyrings/nitrux_testing-archive-keyring.gpg] https://packagecloud.io/nitrux/testing/debian/ trixie main
+deb [signed-by=/etc/apt/keyrings/nitrux_testing-archive-keyring.gpg] https://packagecloud.io/nitrux/testing/debian/ forky main
 EOF
 
 $APT_COMMAND update -q
