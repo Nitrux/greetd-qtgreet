@@ -43,6 +43,7 @@ $APT_COMMAND update -q
 $APT_COMMAND install -y --no-install-recommends \
     cmake \
     meson \
+    mpv \
     ninja-build \
     pkg-config \
     qt6-base-dev \
