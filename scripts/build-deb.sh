@@ -63,7 +63,7 @@ DESTDIR="$DESTDIR" ninja -C .build install
 
 mkdir -p "$DESTDIR/DEBIAN"
 
-PKGNAME="qtgreet"
+PKGNAME="greetd-qtgreet"
 MAINTAINER="uri_herrera@nxos.org"
 ARCHITECTURE="$(dpkg --print-architecture)"
 DESCRIPTION="Qt based greeter for greetd, to be run under wayfire or similar wlr-based compositors."
