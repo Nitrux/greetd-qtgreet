@@ -69,4 +69,4 @@ $APT_COMMAND install -y --no-install-recommends \
     dfl-ipc \
     dfl-login1 \
     dfl-utils \
-    wayqt-qt6
+    dfl-wayqt-qt6
