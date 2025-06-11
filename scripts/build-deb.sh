@@ -36,7 +36,7 @@ cd QtGreet
 
 # --  Configure Build.
 
-meson setup .build --prefix=/usr --buildtype=release -Duse_qt_version=qt5
+meson setup .build --prefix=/usr --buildtype=release
 
 
 # --  Compile Source.
