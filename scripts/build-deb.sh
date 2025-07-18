@@ -76,6 +76,7 @@ Priority: optional
 Architecture: $ARCHITECTURE
 Maintainer: $MAINTAINER
 Description: $DESCRIPTION
+Depends: greetd
 EOF
 
 
