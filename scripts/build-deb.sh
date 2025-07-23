@@ -76,7 +76,7 @@ Priority: optional
 Architecture: $ARCHITECTURE
 Maintainer: $MAINTAINER
 Description: $DESCRIPTION
-Depends: greetd
+Depends: dfl-applications, dfl-ipc, dfl-login1, dfl-utils, dfl-wayqt-qt6, libmpv2, libqt6core6t64, libqt6gui6, libqt6openglwidgets6, libqt6waylandclient6, libqt6widgets6, qt6-wayland,greetd
 EOF
 
 
