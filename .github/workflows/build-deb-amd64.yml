@@ -54,4 +54,4 @@ jobs:
           retention-days: 1
       
       - name: Upload package to Package Cloud
-        run: package_cloud push nitrux/${{ inputs.packageCloudRepo }}/debian/forky ./build/*.deb
+        run: package_cloud push nitrux/${{ inputs.packageCloudRepo }}/debian/duke ./build/*.deb
